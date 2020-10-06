@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Header = () => {
@@ -23,8 +24,12 @@ const Header = () => {
         <HeaderStyle>
             <NavStyle>
                 <MenuStyle>
-                    <li>영화목록</li>
-                    <li>영화등록</li>
+                    <li>
+                        <Link to="/list">영화목록</Link>
+                    </li>
+                    <li>
+                        <Link to="/add">영화등록</Link>
+                    </li>
                 </MenuStyle>
             </NavStyle>
         </HeaderStyle>

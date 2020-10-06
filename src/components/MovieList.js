@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import MovieItem from './MovieItem';
 
 const MovieList = () => {
@@ -35,14 +34,7 @@ const MovieList = () => {
     }
 
     return (
-        // <div className="card">
-        //     <img src={movie.medium_cover_image} />
-        //     <div className="card-body">
-        //         <h4>{movie.title}</h4>
-        //         <button>삭제</button>
-        //     </div>
-        // </div>
-        <div>
+        <div class="grid-container">
             {movie.map((movie, index) => (
                 <MovieItem
                     movie={movie}

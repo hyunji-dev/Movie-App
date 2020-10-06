@@ -48,16 +48,12 @@ const Movie = () => {
         let jsonUser = JSON.stringify(movie);
         console.log(jsonUser);
 
-        // 제이슨을 다시 오브젝트로 바꾸기
-        let objectUser = JSON.parse(jsonUser);
-        console.log(objectUser);
-
         fetch('http://10.100.102.2:8000/api/movie', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8',
             },
-            body: JSON.stringify(movie),
+            body: jsonUser,
         })
             .then((res) => res.text())
             .then((res) => {
@@ -71,15 +67,14 @@ const Movie = () => {
     return (
         <div>
             <form>
-                <InputStyle
+                <input
                     type="text"
-                    value={movie.title}
                     onChange={inputHandle}
                     name="title"
                     placeholder="제목"
                 />
                 <br />
-                <InputStyle
+                <input
                     type="text"
                     value={movie.rating}
                     onChange={inputHandle}
@@ -87,7 +82,7 @@ const Movie = () => {
                     placeholder="평점"
                 />
                 <br />
-                <InputStyle
+                <input
                     type="text"
                     value={movie.summary}
                     onChange={inputHandle}
@@ -95,7 +90,7 @@ const Movie = () => {
                     placeholder="줄거리"
                 />
                 <br />
-                <InputStyle
+                <input
                     type="text"
                     value={movie.medium_cover_image}
                     onChange={inputHandle}

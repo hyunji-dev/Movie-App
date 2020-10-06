@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const MovieDetail = (props) => {
-    const { id, title, rating, medium_cover_image, summary } = props.movie;
+    console.log(props);
+    const id = props.match.params.id;
+    // const { id, title, rating, medium_cover_image, summary } = props.movie;
+    const [movie, setMovie] = useState({});
 
     const InputStyle = styled.input`
         height: 45px;
@@ -29,21 +32,74 @@ const MovieDetail = (props) => {
         cursor: pointer;
     `;
 
-    function update() {}
+    useEffect(() => {
+        fetch('http://10.100.102.2:8000/api/movie/' + id, {
+            method: 'get',
+        })
+            .then((res) => res.json())
+            .then((res) => {
+                console.log(res);
+                setMovie(res);
+            });
+    }, []);
+
+    function inputHandle(e) {
+        setMovie({
+            ...movie,
+            [e.target.name]: e.target.value,
+        });
+    }
+
+    function update(e) {
+        e.preventDefault();
+
+        fetch('http://10.100.102.2:8000/api/movie/' + id, {
+            method: 'put',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+            },
+            body: JSON.stringify(movie),
+        })
+            .then((res) => res.text())
+            .then((res) => {
+                console.log(res);
+                if (res === 'ok') {
+                    alert('영화가 수정되었습니다.');
+                }
+            });
+    }
     return (
         <div>
+            영화 상세보기
+            <br />
             <form>
                 <InputStyle
                     type="text"
-                    value={medium_cover_image}
+                    value={movie.medium_cover_image}
+                    onChange={inputHandle}
                     name="medium_cover_image"
                 />
                 <br />
-                <InputStyle type="text" value={title} name="title" />
+                <InputStyle
+                    type="text"
+                    onChange={inputHandle}
+                    //  value={title}
+                    name="title"
+                />
                 <br />
-                <InputStyle type="text" value={rating} name="rating" />
+                <InputStyle
+                    type="text"
+                    onChange={inputHandle}
+                    //   value={rating}
+                    name="rating"
+                />
                 <br />
-                <InputStyle type="text" value={summary} name="summary" />
+                <InputStyle
+                    type="text"
+                    onChange={inputHandle}
+                    value={movie.summary}
+                    name="summary"
+                />
                 <br />
             </form>
             <ButtonBoxStyle>

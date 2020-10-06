@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import MovieItem from './MovieItem';
 
 const MovieList = () => {
     const [movie, setMovie] = useState([]);
@@ -14,7 +15,6 @@ const MovieList = () => {
     }, []);
 
     function deleteById(id) {
-        alert(id + '번 클릭됨');
         fetch('http://10.100.102.2:8000/api/movie/' + id, {
             method: 'delete',
         })
@@ -26,10 +26,10 @@ const MovieList = () => {
             .then(function (res) {
                 console.log(1, res);
                 if (res === 200) {
-                    alert('ok 응답');
-                    setMovie(movie.filter((movies) => movie.id !== id)); // true
+                    alert('삭제되었습니다.');
+                    setMovie(movie.filter((movie) => movie.id !== id)); // true
                 } else {
-                    alert(res);
+                    alert('삭제 실패');
                 }
             });
     }
@@ -43,13 +43,13 @@ const MovieList = () => {
         //     </div>
         // </div>
         <div>
-            <img src={movie.medium_cover_image} alt="" />
-            <div class="card-body">
-                <Link to={'/detail/' + movie.id}>
-                    <h4 class="card-title">{movie.title}</h4>
-                </Link>
-                <button onClick={() => deleteById(movie.id)}>삭제</button>
-            </div>
+            {movie.map((movie, index) => (
+                <MovieItem
+                    movie={movie}
+                    key={index}
+                    deleteById={deleteById}
+                ></MovieItem>
+            ))}
         </div>
     );
 };

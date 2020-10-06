@@ -1,5 +1,9 @@
 # 실습
 
+### 사진
+
+![main](https://postfiles.pstatic.net/MjAyMDEwMDZfMjAz/MDAxNjAxOTY3OTA1NjQ0.grzc0yVD4YlcYdut79mb5d96j_YLaUOLYTRu3Y0mvXYg.-yG0P1SmdMRp8O_1ZsE5ngd9_bS7uZQfCCalBf58Z_Mg.PNG.soarskyward4/image.png?type=w580)
+
 ### 설치
 
 -   npx create-react-app movie-app

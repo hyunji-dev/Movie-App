@@ -59,8 +59,6 @@ const MovieDetail = (props) => {
     }
     return (
         <div>
-            영화 상세보기
-            <br />
             <form>
                 <InputStyle
                     type="text"
